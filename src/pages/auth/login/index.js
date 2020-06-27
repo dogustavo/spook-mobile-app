@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 import Input from './components/inputs';
@@ -7,7 +7,8 @@ import SpookLogo from '../../../assets/logo.png';
 
 import styles from './style';
 
-const AuthLogin = () => {
+const AuthLogin = ({ navigation }) => {
+
     return (
         <Screen>
             <View style={styles.container}>
@@ -26,7 +27,14 @@ const AuthLogin = () => {
                         <Text style={styles.span}>Esqueci minha senha</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Text style={styles.span}>Criar conta</Text>
+                        <Text 
+                            style={styles.span}
+                            onPress={ () =>
+                                navigation.navigate('UserRegister')
+                            }
+                        >
+                            Criar conta
+                        </Text>
                     </TouchableOpacity>
                 </View>
 
