@@ -1,4 +1,6 @@
 import { StyleSheet } from 'react-native';
+import colors from '../../styles/colors';
+
 
 const styles = StyleSheet.create({
     modalStyle:{
@@ -17,14 +19,20 @@ const styles = StyleSheet.create({
     modalView: {
         zIndex: 2,
         position: 'absolute',
-        backgroundColor: '#FFF',
+        backgroundColor: colors.white,
         justifyContent: 'center',
         alignItems: 'center',
         bottom: 0,
         height: '70%',
         width: '100%',
-        borderRadius: 20,
-    }
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
+    },
+    wrapBackButton: {
+        position: 'absolute',
+        top: 30,
+        left: 30
+    },  
 })
 
 export default styles

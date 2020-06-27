@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, Animated, Dimensions, TouchableOpacity, Text } from 'react-native';
 
+import BackButton from '../../components/svg/backButton';
+
 const { height } = Dimensions.get('window');
 
 import styles from './style'
@@ -39,11 +41,13 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
 			}),
 			Animated.timing(fadeBackground, {
 				toValue: 0,
-				duration: 100,
+                duration: 100,
+                useNativeDriver: true,
 			}),
 			Animated.timing(overlayAnimation, {
 				toValue: height,
-				duration: 50,
+                duration: 50,
+                useNativeDriver: true,
 			}),
         ]).start();
     }
@@ -72,18 +76,18 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
                     ]
                 }}
             >
-            <View>
                 <TouchableOpacity
                     onPress={() => {
                         closeModal()
                         navigation.navigate(`${navigateTo}`)
                     }}
-                    
+                    style={styles.wrapBackButton}
                 >
-                    <Text>Voltar</Text>
+                    <BackButton style={styles.backButton}/>
                 </TouchableOpacity>
-            </View>
+
                 {children}
+
             </Animated.View>
         </View>
     )
