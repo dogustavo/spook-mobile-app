@@ -4,8 +4,10 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
 import PersonalizedInput from '../../../components/input';
+import Button from '../../../components/button';
 
 import styles from './style';
+import colors from '../../../styles/colors';
 
 const UserRegister = ({ navigation }) => {
     return (
@@ -42,15 +44,16 @@ const UserRegister = ({ navigation }) => {
                         icon={'password'}
                     />
 
-                    <TouchableOpacity
-                        style={styles.buttonRegister}
-                    >
-                        <Text
-                            style={styles.buttonText}
-                        >
-                            Cadastrar
-                        </Text>
-                    </TouchableOpacity>
+                    <View style={styles.wrapButton}>
+                        <Button
+                            text={'Cadastrar'}
+                            bgColor={colors.melachite}
+                        />
+                        <Button
+                            text={'Cancelar'}
+                            bgColor={colors.spanishGray}
+                        />
+                    </View>
                 </View>
             </View>
         </ModalTemplate> 
