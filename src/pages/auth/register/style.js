@@ -17,6 +17,13 @@ const styles = StyleSheet.create({
     },
     wrapButton: {
        marginTop: 20
+    },
+    photo: {
+        width: 80,
+        height: 80,
+        borderRadius: 80/2,
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 })
 
