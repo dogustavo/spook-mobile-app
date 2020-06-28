@@ -1,14 +1,18 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
-import Screen from '../../../components/screen';
+import Screen from '../../components/screen';
+import Header from '../../components/header';
 
 import styles from './style';
 
-const Home = () => {
+const Profile = () => {
     return (
         <Screen>
             <View style={styles.container}>
+                <View style={styles.header}>
+                    <Header/>
+                </View>
                 <Text style={styles.text}>
                     Olá
                 </Text>
@@ -18,4 +22,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Profile
