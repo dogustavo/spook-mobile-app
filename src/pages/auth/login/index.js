@@ -42,7 +42,7 @@ const AuthLogin = ({ navigation }) => {
                 setToken(res.token)
                 dispatch(authLogin(res.token))
             })
-            .finally(() => navigation.navigate('Home'))
+            .finally(() => navigation.navigate('Profile'))
     }
 
     const teste = () => {

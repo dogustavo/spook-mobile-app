@@ -15,10 +15,8 @@ const Header = () => {
 
     const { isAuth } = useSelector(state => state.auth)
     const currentScreen = useSelector(state => state.navigation.currentScreen);
-    const navigation = useNavigation()
-
-    console.log('minhoca',currentScreen)
-
+    const navigation = useNavigation();
+    
     return (
         <View style={styles.container}>
             <TouchableOpacity
