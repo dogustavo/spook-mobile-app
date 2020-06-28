@@ -1,11 +1,12 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import reducers from './reducers';
+import mySaga from './sagas';
+import createSagaMiddleware from 'redux-saga'
+
+let sagaMonitor = {}
 
 const persistConfig = {
     key: 'root',
@@ -14,10 +15,12 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
-
-const store = createStore(persistedReducer);
-
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
 
+const store = createStore(persistedReducer, applyMiddleware( sagaMiddleware ));
+
+
+sagaMiddleware.run(mySaga)
 export default store;
 export const persistor = persistStore(store); 

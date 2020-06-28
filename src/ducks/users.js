@@ -39,9 +39,14 @@ export default function reducer(state = initialState, action) {
           return {
               ...state,
               user: payload,
-              error: false,
-              loading: false
           };
+        case Types.ADD_USER: {
+          return {
+            ...state,
+            error: false,
+            loading: true
+          }
+        }
       default:
           return state;
   }
@@ -52,4 +57,4 @@ export default function reducer(state = initialState, action) {
 * Actions Creators
 */
 
-export const createUser = data => ({type: Types.USER, payload: data}); 
+export const createUser = data => ({ type: Types.USER, payload: data }); 

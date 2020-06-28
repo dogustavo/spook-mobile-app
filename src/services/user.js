@@ -1,16 +1,16 @@
 import Http from '../utils/http';
 
-export const createUser = async data => {
-    return await new Promise((resolve, reject) => {
+export const createUser = data => {
+    return new Promise((resolve, reject) => {
         Http.post('/user/create', data)
             .then(res => {
-                console.log(res)
-                // resolve(res.data);
+                console.log('sucesso', res)
+                resolve(res.data);
             })
             .catch((err) => {
                 console.log('erro', err);
                 
-                // reject(err);
+                reject(err);
             });
     });
 };

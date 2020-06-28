@@ -1,10 +1,7 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import React, {useState, useCallback} from 'react';
 import { View, TouchableOpacity, Image, Alert } from 'react-native';
 
-import { createUser } from '../../../services/user';
+import { createUser } from '../../../ducks/users';
 
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
@@ -41,14 +38,15 @@ const UserRegister = ({ navigation }) => {
                 inputErrors[index] = 'Campo Obrigatório'; 
             }
         });
+
         setErros(inputErrors);
+        
         if (!isValid) {
             Alert.alert('Ops', 'Campo Obrigatório');
         }
 
         dispatch(
             createUser({...form})
-                .then(() => navigation.goBack())
         );
         
     };
