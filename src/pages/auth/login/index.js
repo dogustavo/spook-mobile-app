@@ -48,13 +48,6 @@ const AuthLogin = ({ navigation }) => {
             .finally(() => navigation.navigate('Profile'));
     };
 
-<<<<<<< HEAD
-=======
-    const teste = () => {
-        
-    };
-
->>>>>>> d130654a4614e4e571c5889dbaff04a6d847e88a
     return (
         <Screen>
             <View style={styles.container}>

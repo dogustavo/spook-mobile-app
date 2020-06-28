@@ -19,12 +19,12 @@ export const Types = {
 
 const initialState = {
   user: {
-    id: null,
+    _id: null,
     likes: [],
     dislikes: [],
     name: null,
     email: null,
-    age: null,
+    data_nascimento: null,
     avatar: null
   },
   error: '',

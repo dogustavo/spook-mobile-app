@@ -18,20 +18,20 @@ import ImagePicker from 'react-native-image-crop-picker';
 import { useDispatch } from 'react-redux';
 
 const UserRegister = ({ navigation }) => {
-    const [photoData, setPhotoData]       = useState({});
+    const [avatar, setAvatar]             = useState({});
     const [photo, setPhoto]               = useState({});
     const [errors, setErros]              = useState({});
     const [form, setForm]                 = useState({
         name: '',
         email: '',
         password: '',
-        age: ''
+        data_nascimento: '',
+        avatar: ''
     });
 
     const dispatch = useDispatch();
 
-    const formSubmit = useCallback(async () => {
-        console.log('executei');
+    const formSubmit = () => {
         let inputErrors = {};
         let isValid = true;
         Object.keys(form).map(index => {
@@ -44,14 +44,14 @@ const UserRegister = ({ navigation }) => {
         setErros(inputErrors);
         if (!isValid) {
             Alert.alert('Ops', 'Campo Obrigatório');
-        } 
+        }
 
         dispatch(
-            createUser({...form, photoData})
+            createUser({...form})
                 .then(() => navigation.goBack())
         );
         
-    },[form, dispatch, photoData, navigation]);
+    };
 
     const handlePhoto = () => {
         ImagePicker.openPicker({
@@ -61,8 +61,8 @@ const UserRegister = ({ navigation }) => {
             includeBase64: true
         }).then(image => {
             console.log(image);
-            setPhotoData(image);
-            setPhoto(`data:image/gif;base64,${image.data}`);
+            setAvatar(image);
+            setForm({...form, avatar: `data:image/gif;base64,${image.data}`})
         });
     };
 
@@ -77,11 +77,11 @@ const UserRegister = ({ navigation }) => {
                     style={styles.addPhoto}
                 >
                     {
-                        Object.keys(photo).length
+                        Object.keys(form.avatar).length
                         ?
                             <Image
                                 source={{
-                                    uri: photo
+                                    uri: form.avatar
                                 }}
                                 style={styles.photo}
                             />
@@ -100,12 +100,12 @@ const UserRegister = ({ navigation }) => {
                         onChangeText={event => setForm({...form, name: event})}
                     />
                     <PersonalizedInput
-                        value={form.age}
-                        name="age"
+                        value={form.data_nascimento}
+                        name="data_nascimento"
                         secureTextEntry={false}
                         placeholder={'Nascimento'}
                         icon={'calendar'}
-                        onChangeText={event => setForm({...form, age: event})}
+                        onChangeText={event => setForm({...form, data_nascimento: event})}
 
                     />
                     <PersonalizedInput
@@ -144,4 +144,4 @@ const UserRegister = ({ navigation }) => {
     );
 };
 
-export default UserRegister;
+export default UserRegister
