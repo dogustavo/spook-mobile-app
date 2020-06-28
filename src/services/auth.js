@@ -1,7 +1,6 @@
 import Http from '../utils/http';
 
 export const requestLogin = data => {
-    console.log(data)
     return new Promise((resolve, reject) => {
         Http.post('/user/auth', data)
             .then(res => {

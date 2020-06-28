@@ -45,10 +45,6 @@ const AuthLogin = ({ navigation }) => {
             .finally(() => navigation.navigate('Profile'))
     }
 
-    const teste = () => {
-        
-    }
-
     return (
         <Screen>
             <View style={styles.container}>
