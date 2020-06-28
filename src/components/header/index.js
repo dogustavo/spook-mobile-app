@@ -7,6 +7,8 @@ import BookIcon from '../svg/bookIcon';
 import SettingsIcon from '../svg/settingsIcon';
 import ChatIcon from '../svg/chatIcon';
 
+import colors from '../../styles/colors';
+
 import styles from './style'
 
 const Header = () => {
@@ -21,24 +23,42 @@ const Header = () => {
         <View style={styles.container}>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Profile')}
+                style={{
+                    ...styles.menuButton,
+                    ...(currentScreen == 'Profile' && styles.buttonSelected)
+                }}
             >
-                <View>
-                    <SettingsIcon/>
-                </View>
+                {
+                    currentScreen == 'Profile'
+                                ? <SettingsIcon color={colors.tartOrange}/>
+                                : <SettingsIcon/>
+                }
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('AppNavigator')}
+                style={{
+                    ...styles.menuButton,
+                    ...(currentScreen == 'BookList' && styles.buttonSelected)
+                }}
             >
-                <View>
-                    <BookIcon/>
-                </View>
+                {
+                    currentScreen == 'BookList'
+                                ? <BookIcon color={colors.tartOrange}/>
+                                : <BookIcon/>
+                }
+                
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Profile')}
+                style={{
+                    ...styles.menuButton,
+                }}
             >
-                <View>
-                    <ChatIcon/>
-                </View>
+                {
+                    currentScreen == 'Profile'
+                                ? <ChatIcon color={colors.tartOrange}/>
+                                : <ChatIcon/>
+                }
             </TouchableOpacity>
         </View>
     )

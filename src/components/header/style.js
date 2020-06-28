@@ -12,6 +12,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 20
+    },
+    menuButton: {
+        height: 50,
+        width: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    buttonSelected: {
+        height: 55,
+        width: 40,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderBottomWidth: 5,
+        borderBottomColor: colors.tartOrange,
     }
 })
 
