@@ -1,12 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
+import thunk from 'redux-thunk'
 import AsyncStorage from '@react-native-community/async-storage';
 
 import reducers from './reducers';
-import mySaga from './sagas';
-import createSagaMiddleware from 'redux-saga'
-
-let sagaMonitor = {}
 
 const persistConfig = {
     key: 'root',
@@ -15,12 +12,10 @@ const persistConfig = {
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
-const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 
+const middlewares = [thunk];
 
-const store = createStore(persistedReducer, applyMiddleware( sagaMiddleware ));
+const store = createStore(persistedReducer, applyMiddleware(...middlewares));
 
-
-sagaMiddleware.run(mySaga)
 export default store;
 export const persistor = persistStore(store); 

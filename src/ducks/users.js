@@ -7,6 +7,8 @@
  * 
  */
 
+import * as UserService from '../services/user'
+
 export const Types = {
   USER: 'users/USER',
   ADD_USER: 'users/ADD_USER' 
@@ -58,3 +60,13 @@ export default function reducer(state = initialState, action) {
 */
 
 export const createUser = data => ({ type: Types.USER, payload: data }); 
+
+export const saveUser = data => async dispatch => {
+  try {
+    const response = await UserService.createUser(data)
+    dispatch(createUser(response))
+    alert(JSON.stringify(response, null, 2))
+  } catch (error) {
+    alert(error.message)
+  }
+}

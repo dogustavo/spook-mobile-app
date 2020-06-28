@@ -1,7 +1,7 @@
 import React, {useState, useCallback} from 'react';
 import { View, TouchableOpacity, Image, Alert } from 'react-native';
 
-import { createUser } from '../../../ducks/users';
+import { saveUser } from '../../../ducks/users';
 
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
@@ -46,7 +46,7 @@ const UserRegister = ({ navigation }) => {
         }
 
         dispatch(
-            createUser({...form})
+            saveUser({...form})
         );
         
     };
