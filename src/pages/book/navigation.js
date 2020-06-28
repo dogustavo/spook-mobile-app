@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,7 +19,7 @@ const bookStack = () => {
                     backgroundColor: 'transparent'
                 }
             }}
-            headerMode='none'
+            headerMode="none"
         >
 
             <Stack.Screen 
@@ -37,7 +40,7 @@ const bookStack = () => {
 			/>
 
         </Stack.Navigator>
-    )
-}
+    );
+};
 
-export default bookStack
+export default bookStack;

@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 /**
  *
  * Actions Types
@@ -43,7 +46,7 @@ export default function reducer(state = initialState, action) {
   
     let checkoutStep;
   
-    switch(screenName) {
+    switch (screenName) {
       case 'BookList':
         checkoutStep = 0;
         break;

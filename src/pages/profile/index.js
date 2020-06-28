@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
@@ -13,7 +16,7 @@ const Profile = () => {
     const user = {
         name: 'Gustavo Oliveira',
         age: '22',
-    }
+    };
     return (
         <Screen>
             <View style={styles.container}>
@@ -41,7 +44,7 @@ const Profile = () => {
             </View>
         </Screen>
         
-    )
-}
+    );
+};
 
-export default Profile
+export default Profile;

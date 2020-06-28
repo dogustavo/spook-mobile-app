@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -8,6 +11,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: 0
     },
-})
+});
 
-export default styles
+export default styles;

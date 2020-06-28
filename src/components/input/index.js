@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { View, TextInput } from 'react-native';
 
@@ -14,16 +17,19 @@ const inputIcons = {
     calendar: <Calendar/>,
     email: <Email/>,
     password: <Password/>
-}
+};
 
-const PersonalizedInput = ({placeholder, secureTextEntry, icon}) => {
+const PersonalizedInput = ({placeholder, secureTextEntry, onChangeText, value, name, icon}) => {
     return (
         <View>
             <View style={styles.icon}>
                 {inputIcons[icon]}
             </View>
             <TextInput
-                autoCapitalize='none'
+                value={value}
+                name={name}
+                onChangeText={onChangeText}
+                autoCapitalize="none"
                 autoCorrect={false}
                 style={styles.inputs}
                 secureTextEntry={secureTextEntry}
@@ -31,7 +37,7 @@ const PersonalizedInput = ({placeholder, secureTextEntry, icon}) => {
                 placeholderTextColor={colors.jet}
             />
         </View>
-    )
-}
+    );
+};
 
-export default PersonalizedInput
+export default PersonalizedInput;

@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -9,11 +12,11 @@ import ChatIcon from '../svg/chatIcon';
 
 import colors from '../../styles/colors';
 
-import styles from './style'
+import styles from './style';
 
 const Header = () => {
 
-    const { isAuth } = useSelector(state => state.auth)
+    const { isAuth } = useSelector(state => state.auth);
     const currentScreen = useSelector(state => state.navigation.currentScreen);
     const navigation = useNavigation();
     
@@ -60,7 +63,7 @@ const Header = () => {
                  <ChatIcon/>
             </TouchableOpacity>
         </View>
-    )
-}
+    );
+};
 
-export default Header
+export default Header;

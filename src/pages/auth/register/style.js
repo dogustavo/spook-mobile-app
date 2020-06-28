@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import { StyleSheet } from 'react-native';
 import colors from '../../../styles/colors';
 
@@ -10,7 +13,7 @@ const styles = StyleSheet.create({
     addPhoto: {
         width: 80,
         height: 80,
-        borderRadius: 80/2,
+        borderRadius: 80 / 2,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: colors.jet
@@ -21,10 +24,10 @@ const styles = StyleSheet.create({
     photo: {
         width: 80,
         height: 80,
-        borderRadius: 80/2,
+        borderRadius: 80 / 2,
         justifyContent: 'center',
         alignItems: 'center',
     }
-})
+});
 
 export default styles;
