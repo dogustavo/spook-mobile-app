@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 /**
  * 
  * Actions Types
@@ -20,7 +23,7 @@ const initialState = {
     token: null,
     isAuth: null,
     user: ''
-}
+};
 
 export default function reducer(state = initialState, action) {
     const { type, payload } = action;
@@ -31,18 +34,18 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 token: payload,
                 isAuth: true
-            }
+            };
         case Types.AUTH_LOGOUT: 
             return {
                 ...state,
                 token: null,
                 isAuth: false
-            }
+            };
         case Types.AUTH_USER:
             return {
                 ...state,
                 user: payload
-            }
+            };
     
         default:
             return state;

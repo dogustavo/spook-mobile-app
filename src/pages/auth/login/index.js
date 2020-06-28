@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React, { useState, useEffect } from 'react';
 import { View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 
@@ -25,39 +28,46 @@ const AuthLogin = ({ navigation }) => {
     const formSubmit = async () => {
         let inputErrors = {};
 
-        if(email === '') {
-            inputErrors['email'] = 'Empty';
+        if (email === '') {
+            inputErrors.email = 'Empty';
         }
 
-        if(password === '') {
+        if (password === '') {
             inputErrors.password = 'Empty';
         }
 
-        if( Object.keys(inputErrors).length) {
-            Alert.alert('Ops', 'Campo Obrigatório')
+        if ( Object.keys(inputErrors).length) {
+            Alert.alert('Ops', 'Campo Obrigatório');
         }
 
         requestLogin({ email, password })
             .then(res => {
-                setToken(res.token)
-                dispatch(authLogin(res.token))
+                setToken(res.token);
+                dispatch(authLogin(res.token));
             })
-            .finally(() => navigation.navigate('Profile'))
-    }
+            .finally(() => navigation.navigate('Profile'));
+    };
 
+<<<<<<< HEAD
+=======
+    const teste = () => {
+        
+    };
+
+>>>>>>> d130654a4614e4e571c5889dbaff04a6d847e88a
     return (
         <Screen>
             <View style={styles.container}>
                 <Image source={SpookLogo} style={styles.spookLogo}/>
                 <Input
-                    placeholder='E-MAIL'
+                    placeholder="E-MAIL"
                     name={'email'}
                     value={email}
                     textChange={text => setEmail(text)}
                     secureTextEntry={false}
                 />
                 <Input
-                    placeholder='SENHA'
+                    placeholder="SENHA"
                     name={'password'}
                     value={password}
                     textChange={text => setPassword(text)}
@@ -88,7 +98,7 @@ const AuthLogin = ({ navigation }) => {
                 </TouchableOpacity>
             </View>
         </Screen>
-    )
-}
+    );
+};
 
 export default AuthLogin;

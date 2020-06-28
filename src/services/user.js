@@ -3,19 +3,15 @@
 /* eslint-disable no-trailing-spaces */
 import Http from '../utils/http';
 
-export const requestLogin = data => {
-<<<<<<< HEAD
-=======
-    console.log(data);
->>>>>>> d130654a4614e4e571c5889dbaff04a6d847e88a
-    return new Promise((resolve, reject) => {
-        Http.post('/user/auth', data)
+export const createUser = async data => {
+    return await new Promise((resolve, reject) => {
+        Http.post('/user/create', data)
             .then(res => {
-                console.log('teste', res);
                 resolve(res.data);
+                console.log(res);
             })
             .catch((err) => {
-                console.log('error');
+                console.log(err);
                 reject(err);
             });
     });

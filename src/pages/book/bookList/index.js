@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { View, Text } from 'react-native';
 
@@ -18,6 +21,6 @@ const BookList = () => {
                 </Text>
             </View>
         </Screen>
-    )
-}
-export default BookList
+    );
+};
+export default BookList;

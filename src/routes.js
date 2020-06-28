@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import React, { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { 
@@ -27,19 +30,19 @@ const fadeTransition = {
   cardStyleInterpolator: ({ current }) => {
     return {
       cardStyle: {
-				opacity: current.progress.interpolate({
+            opacity: current.progress.interpolate({
           inputRange: [0, 1],
           outputRange: [0, 1],
-          extrapolate: "clamp",
+          extrapolate: 'clamp',
         }),
       }
     };
   },
-}
+};
 
 export default function Routes() {
 
-    const { isAuth } = useSelector(state => state.auth)
+    const { isAuth } = useSelector(state => state.auth);
     const routeNameRef = useRef();
     const navigationRef = useRef();
     
@@ -54,8 +57,8 @@ export default function Routes() {
                 const currentRouteName = navigationRef.current.getCurrentRoute().name;
 
                 
-                if( previousRouteName !== currentRouteName ) {
-                    dispatch(setCurrentScreen(currentRouteName))
+                if ( previousRouteName !== currentRouteName ) {
+                    dispatch(setCurrentScreen(currentRouteName));
                 }
 
                 routeNameRef.current = currentRouteName;
@@ -68,14 +71,14 @@ export default function Routes() {
                 {isAuth ? (
                     <>
                         <Stack.Screen
-                            name='Profile'
+                            name="Profile"
                             component={Profile}
                             options={{
                                 ...fadeTransition
                             }}
                         />
                         <Stack.Screen
-                            name='AppNavigator'
+                            name="AppNavigator"
                             component={BookStack}
                             options={{
                                 ...fadeTransition
@@ -85,16 +88,16 @@ export default function Routes() {
                 ) : (
                     <>
                         <Stack.Screen 
-                            name='AuthLogin'
+                            name="AuthLogin"
                             component={AuthLogin}
                         />
                         <Stack.Screen 
-                            name='UserRegister'
+                            name="UserRegister"
                             component={UserRegister}
                         />
                     </>
                 )}
             </Stack.Navigator>
         </NavigationContainer>
-    )
+    );
 }
