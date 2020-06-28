@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { 
+    createStackNavigator, 
+    TransitionSpecs, 
+    HeaderStyleInterpolators 
+} from '@react-navigation/stack';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setCurrentScreen } from './ducks/navigation';
@@ -12,6 +16,26 @@ import Profile from './pages/profile';
 import BookStack from './pages/book/navigation';
 
 const Stack = createStackNavigator();
+
+const fadeTransition = {
+	gestureDirection: 'horizontal',
+  transitionSpec: {
+    open: TransitionSpecs.TransitionIOSSpec,
+    close: TransitionSpecs.TransitionIOSSpec,
+  },
+  headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+  cardStyleInterpolator: ({ current }) => {
+    return {
+      cardStyle: {
+				opacity: current.progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1],
+          extrapolate: "clamp",
+        }),
+      }
+    };
+  },
+}
 
 export default function Routes() {
 
@@ -46,10 +70,16 @@ export default function Routes() {
                         <Stack.Screen
                             name='Profile'
                             component={Profile}
+                            options={{
+                                ...fadeTransition
+                            }}
                         />
                         <Stack.Screen
                             name='AppNavigator'
                             component={BookStack}
+                            options={{
+                                ...fadeTransition
+                            }}
                         />
                     </>
                 ) : (

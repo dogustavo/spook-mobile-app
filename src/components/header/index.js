@@ -49,16 +49,17 @@ const Header = () => {
                 
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={() => navigation.navigate('Profile')}
+                // onPress={() => navigation.navigate('Profile')}
                 style={{
                     ...styles.menuButton,
                 }}
             >
-                {
+                {/* {
                     currentScreen == 'Profile'
                                 ? <ChatIcon color={colors.tartOrange}/>
                                 : <ChatIcon/>
-                }
+                } */}
+                 <ChatIcon/>
             </TouchableOpacity>
         </View>
     )
