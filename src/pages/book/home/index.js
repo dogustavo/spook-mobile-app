@@ -1,15 +1,20 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 
+import Screen from '../../../components/screen';
+
 import styles from './style';
 
 const Home = () => {
     return (
-        <View style={styles.container}>
-            <Text>
-                Olá
-            </Text>
-        </View>
+        <Screen>
+            <View style={styles.container}>
+                <Text style={styles.text}>
+                    Olá
+                </Text>
+            </View>
+        </Screen>
+        
     )
 }
 
