@@ -62,6 +62,10 @@ const styles = StyleSheet.create({
         width: 20,
         height: 10
     },
+    buttonLogout: {
+        position: 'absolute',
+        bottom: 90
+    }
 });
 
 export default styles;

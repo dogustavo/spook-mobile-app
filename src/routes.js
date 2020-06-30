@@ -16,7 +16,7 @@ import AuthLogin from './pages/auth/login';
 import UserRegister from './pages/auth/register';
 import Profile from './pages/profile';
 
-import BookStack from './pages/book/navigation';
+import BookStack from './pages/bookRegister/navigation';
 
 const Stack = createStackNavigator();
 
