@@ -7,7 +7,6 @@ import Header from '../../../components/header';
 import styles from './style';
 
 import booksData from '../../../components/JSON/book';
-import { transform } from '@babel/core';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height
 const SCREEN_WIDTH = Dimensions.get('window').width
