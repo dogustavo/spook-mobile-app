@@ -14,6 +14,7 @@ import { setCurrentScreen } from './ducks/navigation';
 
 import AuthLogin from './pages/auth/login';
 import UserRegister from './pages/auth/register';
+import BookAdd from './pages/auth/bookADD';
 import Profile from './pages/profile';
 
 import BookStack from './pages/bookRegister/navigation';
@@ -94,6 +95,10 @@ export default function Routes() {
                         <Stack.Screen 
                             name="UserRegister"
                             component={UserRegister}
+                        />
+                        <Stack.Screen 
+                            name="BookAdd"
+                            component={BookAdd}
                         />
                     </>
                 )}

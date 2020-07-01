@@ -12,6 +12,12 @@ import SettingsIcon from '../../components/svg/settingsIcon';
 import BookIcon from '../../components/svg/bookIcon';
 import ProfilePic from '../../assets/profile_pic.jpg';
 
+import { removeToken } from '../../utils/http';
+
+import { authLogout } from '../../ducks/auth';
+import { useDispatch } from 'react-redux';
+
+
 import colors from '../../styles/colors';
 
 import styles from './style';
@@ -21,6 +27,14 @@ const Profile = () => {
         name: 'Lucas Filho',
         age: '26',
     };
+
+    const dispatch = useDispatch();
+
+    const handleLogOut = () =>  {
+        removeToken();
+        dispatch(authLogout());
+    };
+
     return (
         <Screen>
             <View style={styles.container}>
@@ -51,7 +65,7 @@ const Profile = () => {
 
                 <View style={styles.buttonLogout}>
                     <Button
-                        onPress={() => Alert.alert('Atenção', 'Meu pau na sua mão')}
+                        onPress={handleLogOut}
                         text={'Sair'}
                         bgColor={colors.tartOrange}
                     />

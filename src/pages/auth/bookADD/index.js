@@ -1,58 +1,34 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable comma-dangle */
 /* eslint-disable no-trailing-spaces */
-import React, {useState, useCallback} from 'react';
-import { View, TouchableOpacity, Image, Alert } from 'react-native';
-
-import { saveUser } from '../../../ducks/users';
+import React, { useState } from 'react';
+import { View, TouchableOpacity, Image, Picker } from 'react-native';
 
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
 import PersonalizedInput from '../../../components/input';
 import Button from '../../../components/button';
 
-import styles from './style';
+import Stilos from './style';
 import colors from '../../../styles/colors';
 
 import ImagePicker from 'react-native-image-crop-picker';
-import { useDispatch } from 'react-redux';
 
-const UserRegister = ({ navigation }) => {
+const BookAdd = ({ navigation }) => {
     const [avatar, setAvatar]             = useState({});
     const [photo, setPhoto]               = useState({});
     const [errors, setErros]              = useState({});
     const [form, setForm]                 = useState({
         name: '',
-        email: '',
-        password: '',
-        data_nascimento: '',
+        descricao: '',
+        autor: '',
+        editora: '',
+        select: '',
         avatar: ''
     });
 
-    const dispatch = useDispatch();
-
     const formSubmit = () => {
-        let inputErrors = {};
-        let isValid = true;
-        Object.keys(form).map(index => {
-            const formItem = form[index];
-            if (formItem === ''){
-                isValid = false;
-                inputErrors[index] = 'Campo Obrigatório'; 
-            }
-        });
-
-        setErros(inputErrors);
-        
-        if (!isValid) {
-            Alert.alert('Ops', 'Campo Obrigatório');
-        }
-
-        dispatch(
-            saveUser({...form})
-        );
-        
-        navigation.navigate('BookAdd');
+        navigation.navigate('AuthLogin');
     };
 
     const handlePhoto = () => {
@@ -70,13 +46,13 @@ const UserRegister = ({ navigation }) => {
 
     return (
         <ModalTemplate
-            navigateTo={'BookAdd'}
+            navigateTo={'AuthLogin'}
             navigation={navigation}
         >
-            <View style={styles.container}>
+            <View style={Stilos.container}>
                 <TouchableOpacity
                     onPress={handlePhoto}
-                    style={styles.addPhoto}
+                    style={Stilos.addPhoto}
                 >
                     {
                         Object.keys(form.avatar).length
@@ -85,7 +61,7 @@ const UserRegister = ({ navigation }) => {
                                 source={{
                                     uri: form.avatar
                                 }}
-                                style={styles.photo}
+                                style={Stilos.photo}
                             />
                         :
                             <AddPhoto/>
@@ -93,43 +69,55 @@ const UserRegister = ({ navigation }) => {
                 </TouchableOpacity>
 
                 <View>
+                    
                     <PersonalizedInput
                         value={form.name}
                         name="nome"
                         secureTextEntry={false}
-                        placeholder={'Nome'}
-                        icon={'profile'}
+                        placeholder={'nome'}
                         onChangeText={event => setForm({...form, name: event})}
                     />
+                                        
                     <PersonalizedInput
-                        value={form.data_nascimento}
-                        name="data_nascimento"
+                        value={form.descricao}
+                        name="nome"
+                        multiline={true}
+                        numberOfLines={4}
                         secureTextEntry={false}
-                        placeholder={'Nascimento'}
-                        icon={'calendar'}
-                        onChangeText={event => setForm({...form, data_nascimento: event})}
-
+                        placeholder={'Descrição'}
+                        onChangeText={event => setForm({...form, name: event})}
                     />
+                                        
+                    <Picker
+                        selectedValue={form.select}
+                        style={form.select}
+                        onValueChange={(itemValue) => setForm({...form, select: itemValue})}
+                    >
+                        <Picker.Item label="Novo" value="1" />
+                        <Picker.Item label="Mediano" value="2" />
+                        <Picker.Item label="Antigo" value="3" />
+                    </Picker>
+
+                                        
                     <PersonalizedInput
-                        value={form.email}
-                        name="email"
+                        value={form.autor}
+                        name="nome"
                         secureTextEntry={false}
-                        placeholder={'E-mail'}
-                        icon={'email'}
-                        onChangeText={event => setForm({...form, email: event})}
-
+                        placeholder={'Autor'}
+                        onChangeText={event => setForm({...form, name: event})}
                     />
+
+                                        
                     <PersonalizedInput
-                        value={form.password}
-                        name="password"
-                        secureTextEntry={true}
-                        placeholder={'Password'}
-                        icon={'password'}
-                        onChangeText={event => setForm({...form, password: event})}
-
+                        value={form.editora}
+                        name="nome"
+                        secureTextEntry={false}
+                        placeholder={'Editora'}
+                        onChangeText={event => setForm({...form, name: event})}
                     />
+                   
 
-                    <View style={styles.wrapButton}>
+                    <View style={Stilos.wrapButton}>
                         <Button
                             onPress={formSubmit}
                             text={'Cadastrar'}
@@ -146,4 +134,4 @@ const UserRegister = ({ navigation }) => {
     );
 };
 
-export default UserRegister;
+export default BookAdd;

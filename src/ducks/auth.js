@@ -36,6 +36,7 @@ export default function reducer(state = initialState, action) {
                 isAuth: true
             };
         case Types.AUTH_LOGOUT: 
+            console.log('ue');
             return {
                 ...state,
                 token: null,
@@ -58,4 +59,4 @@ export default function reducer(state = initialState, action) {
  */
 
 export const authLogin  = token => ({ type: Types.AUTH_LOGIN, payload: token });
-export const authLogout = () => ({ type: Types.LOGOUT });
+export const authLogout = () => ({ type: Types.AUTH_LOGOUT });
