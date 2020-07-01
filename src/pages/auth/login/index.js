@@ -14,13 +14,15 @@ import SpookLogo from '../../../assets/logo.png';
 
 import styles from './style';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
 
-const AuthLogin = ({ navigation }) => {
+const AuthLogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErros] = useState({});
 
     const isAuth = useSelector( store => store.auth.isAuth );
+    const navigation = useNavigation()
 
 
     const dispatch = useDispatch();
@@ -45,7 +47,8 @@ const AuthLogin = ({ navigation }) => {
                 setToken(res.token);
                 dispatch(authLogin(res.token));
             })
-            .finally(() => navigation.navigate('Profile'));
+
+        navigation.navigate('Profile')
     };
 
     return (

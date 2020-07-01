@@ -76,10 +76,10 @@ const BookList = () => {
                             
                             <Animated.View 
                                 key={book.id} 
-                                // {...panResponder.panHandlers}
+                                {...panResponder.panHandlers}
                                 style={{
                                     ...styles.card,
-                                    // transform: position.getTranslateTransform()
+                                    transform: position.getTranslateTransform()
                                 }}
                             >
                                 <Image
