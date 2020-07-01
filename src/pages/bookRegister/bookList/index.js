@@ -1,24 +1,41 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 import Screen from '../../../components/screen';
 import Header from '../../../components/header';
 
 import styles from './style';
 
+import booksData from '../../../components/JSON/book';
+
 const BookList = () => {
+
     return (
-        <Screen>
+        <Screen color="#FFF">
             <View style={styles.container}>
                 <View style={styles.header}>
                     <Header/>
                 </View>
-                <Text style={styles.text}>
-                    Olá
-                </Text>
+                <View 
+                    style={styles.cardContainer}
+                >
+                    {
+                        booksData.map((book, index) => (
+                            
+                            <View key={book.id} style={{...styles.card, zIndex: booksData.length - index}}>
+                                <Image
+                                    source={{uri: `${book.photo}`}}
+                                    style={styles.bookPhoto}
+                                />
+
+                                <View style={styles.wrapBookName}>
+                                    <Text style={styles.bookName}>{book.name}</Text>
+                                </View>
+                            </View>
+                            
+                        ))
+                    }  
+                </View>
             </View>
         </Screen>
     );
