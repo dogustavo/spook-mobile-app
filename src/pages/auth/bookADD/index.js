@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Image, Picker } from 'react-native';
 
