@@ -47,8 +47,6 @@ const AuthLogin = () => {
                 setToken(res.token);
                 dispatch(authLogin(res.token));
             })
-
-        navigation.navigate('Profile')
     };
 
     return (
