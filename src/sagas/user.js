@@ -9,7 +9,7 @@ export function* saveUser(data) {
 
     alert(JSON.stringify(response, null, 2));
 
-    // yield put({ type: UserType.ADD_USER, payload: response })
+    yield put({ type: UserType.ADD_USER, payload: response })
   } catch (error) {
     alert(error.message);
   }
