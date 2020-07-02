@@ -17,7 +17,6 @@ import { removeToken } from '../../utils/http';
 import { authLogout } from '../../ducks/auth';
 import { useDispatch } from 'react-redux';
 
-
 import colors from '../../styles/colors';
 
 import styles from './style';

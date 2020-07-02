@@ -72,11 +72,8 @@ export default function Routes() {
                 {isAuth ? (
                     <>
                         <Stack.Screen
-                            name="Profile"
+                            name='Profile'
                             component={Profile}
-                            options={{
-                                ...fadeTransition
-                            }}
                         />
                         <Stack.Screen
                             name="AppNavigator"

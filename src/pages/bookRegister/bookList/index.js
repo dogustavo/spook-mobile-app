@@ -8,7 +8,8 @@ import styles from './style';
 
 import booksData from '../../../components/JSON/book';
 
-const SCREEN_HEIGHT = Dimensions.get('window').height
+const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
+const SWIPE_OUT_DURATION = 250;
 const SCREEN_WIDTH = Dimensions.get('window').width
 const position = new Animated.ValueXY();
 
@@ -26,42 +27,41 @@ const BookList = () => {
             position.setValue({ x: gestureState.dx, y: gestureState.dy });
         } ,
         onPanResponderRelease:(evt, gestureState) => {
-            if(
-                position.x._value < -50 && 
-                position.y._value > SCREEN_HEIGHT / 2 - 150 && 
-                position.y._value < SCREEN_HEIGHT / 2 
-            ) {
-                Animated.spring(position, {
-                    toValue: { x: -SCREEN_WIDTH - 10, y: position.y._value},
-                    friction: 10,
-                }).start(() => {
-                    setLike([...like, booksData[current].name]);
-                    if( current == booksData.length - 1 ) { 
-                        setDone(true);
-                        position.setValue({x: 0, y: 0})
-                    }
-                })
-            }
-            else if(
-                position.x._value > 50 &&
-                position.y._value > SCREEN_HEIGHT / 2 - 150 &&
-                position.y._value < SCREEN_HEIGHT / 2
-            ) {
-                Animated.spring(position, {
-                    toValue: { x: -SCREEN_WIDTH + 10, y: position.y._value},
-                    friction: 10,
-                }).start(() => {
-                    setDislike([...like, booksData[current].name]);
-                    if( current == booksData.length - 1 ) { 
-                        setDone(true);
-                        position.setValue({x: 0, y: 0})
-                    }
-                })
+            if (gestureState.dx > SWIPE_THRESHOLD) {
+                console.log('swipe right');
+            } else if (gestureState.dx < -SWIPE_THRESHOLD) {
+                forceSwipe('left')
+            } else {
+               Animated.spring(position, {
+                   toValue: {x: 0, y: 0},
+                   useNativeDriver: true
+               }).start()
             }
         }
     })
 
+    const onSwipeComplete = (direction) => {
+        const item = data[current];
 
+        direction === 'right' ? setLike(item) : setDislike(item);
+        position.setValue({ x: 0, y: 0 });
+        setCurrent(current + 1)
+    }
+
+    const forceSwipe = (direction) => {
+        const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
+        Animated.timing(position, {
+          toValue: { x, y: 0 },
+          duration: SWIPE_OUT_DURATION,
+          useNativeDriver: true
+        }).start(() => onSwipeComplete(direction));
+      }
+
+    const rotate = position.x.interpolate({
+        inputRange: [-SCREEN_WIDTH * 1.5, 0, SCREEN_WIDTH * 1.5],
+        outputRange: ['-120deg', '0deg', '120deg']
+    })
+    
     return (
         <Screen color="#FFF">
             <View style={styles.container}>
@@ -72,27 +72,41 @@ const BookList = () => {
                     style={styles.cardContainer}
                 >
                     {
-                        booksData.map((book, index) => (
-                            
-                            <Animated.View 
-                                key={book.id} 
-                                // {...panResponder.panHandlers}
-                                style={{
-                                    ...styles.card,
-                                    // transform: position.getTranslateTransform()
-                                }}
-                            >
-                                <Image
-                                    source={{uri: `${book.photo}`}}
-                                    style={styles.bookPhoto}
-                                />
+                        booksData.map((book, index) => {
+                            return index === 0 ? (
+                                <Animated.View 
+                                    key={book.id} 
+                                    {...panResponder.panHandlers}
+                                    style={{
+                                        ...styles.card,
+                                        transform: [{rotate}]
+                                    }}
+                                >
+                                    <Image
+                                        source={{uri: `${book.photo}`}}
+                                        style={styles.bookPhoto}
+                                    />
 
-                                <View style={styles.wrapBookName}>
-                                    <Text style={styles.bookName}>{book.name}</Text>
+                                    <View style={styles.wrapBookName}>
+                                        <Text style={styles.bookName}>{book.name}</Text>
+                                    </View>
+                                </Animated.View>
+                            ) : (
+                                <View 
+                                    key={book.id} 
+                                    style={styles.card}
+                                >
+                                    <Image
+                                        source={{uri: `${book.photo}`}}
+                                        style={styles.bookPhoto}
+                                    />
+
+                                    <View style={styles.wrapBookName}>
+                                        <Text style={styles.bookName}>{book.name}</Text>
+                                    </View>
                                 </View>
-                            </Animated.View>
-                            
-                        )).reverse()
+                            )
+                        }).reverse()
                     }  
                 </View>
             </View>
