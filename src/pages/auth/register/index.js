@@ -70,7 +70,7 @@ const UserRegister = ({ navigation }) => {
 
     return (
         <ModalTemplate
-            navigateTo={'BookAdd'}
+            navigateTo={'AuthLogin'}
             navigation={navigation}
         >
             <View style={styles.container}>
