@@ -19,7 +19,8 @@ const Stilos = StyleSheet.create({
         backgroundColor: colors.jet
     },
     wrapButton: {
-       marginTop: 20
+       marginTop: 20,
+       marginBottom: 40
     },
     photo: {
         width: 80,
@@ -41,7 +42,6 @@ const Stilos = StyleSheet.create({
         color: '#FFF',
         marginTop: 10
     }
-
 });
 
 export default Stilos;

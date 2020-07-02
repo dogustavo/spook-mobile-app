@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Image, Picker } from 'react-native';
+import { View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
 
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
 import PersonalizedInput from '../../../components/input';
 import Button from '../../../components/button';
+
+import Select from './components/select';
 
 import Stilos from './style';
 import colors from '../../../styles/colors';
@@ -13,8 +15,6 @@ import ImagePicker from 'react-native-image-crop-picker';
 
 const BookAdd = ({ navigation }) => {
     const [avatar, setAvatar]             = useState({});
-    const [photo, setPhoto]               = useState({});
-    const [errors, setErros]              = useState({});
     const [form, setForm]                 = useState({
         name: '',
         descricao: '',
@@ -23,6 +23,12 @@ const BookAdd = ({ navigation }) => {
         select: '',
         avatar: ''
     });
+
+    const optionsSelect = [
+        { label: "Novo", value: "1"},
+        { label: "Mediano", value: "2"},
+        { label: "Antigo", value: "3"}
+    ]
 
     const formSubmit = () => {
         navigation.navigate('AuthLogin');
@@ -65,7 +71,7 @@ const BookAdd = ({ navigation }) => {
                     }
                 </TouchableOpacity>
 
-                <View>
+                <KeyboardAvoidingView style={Stilos.keyBoard}>
                     
                     <PersonalizedInput
                         value={form.name}
@@ -82,18 +88,14 @@ const BookAdd = ({ navigation }) => {
                         numberOfLines={4}
                         secureTextEntry={false}
                         placeholder={'Descrição'}
-                        onChangeText={event => setForm({...form, name: event})}
+                        onChangeText={event => setForm({...form, descricao: event})}
                     />
-                                        
-                    <Picker
+
+                    <Select
+                        options={optionsSelect}
                         selectedValue={form.select}
-                        style={form.select}
                         onValueChange={(itemValue) => setForm({...form, select: itemValue})}
-                    >
-                        <Picker.Item label="Novo" value="1" />
-                        <Picker.Item label="Mediano" value="2" />
-                        <Picker.Item label="Antigo" value="3" />
-                    </Picker>
+                    />
 
                                         
                     <PersonalizedInput
@@ -101,7 +103,7 @@ const BookAdd = ({ navigation }) => {
                         name="nome"
                         secureTextEntry={false}
                         placeholder={'Autor'}
-                        onChangeText={event => setForm({...form, name: event})}
+                        onChangeText={event => setForm({...form, autor: event})}
                     />
 
                                         
@@ -110,7 +112,7 @@ const BookAdd = ({ navigation }) => {
                         name="nome"
                         secureTextEntry={false}
                         placeholder={'Editora'}
-                        onChangeText={event => setForm({...form, name: event})}
+                        onChangeText={event => setForm({...form, editora: event})}
                     />
                    
 
@@ -125,7 +127,7 @@ const BookAdd = ({ navigation }) => {
                             bgColor={colors.spanishGray}
                         />
                     </View>
-                </View>
+                </KeyboardAvoidingView>
             </View>
         </ModalTemplate> 
     );
