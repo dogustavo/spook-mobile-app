@@ -1,10 +1,7 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import { StyleSheet } from 'react-native';
 import colors from '../../../styles/colors';
 
-const Stilos = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingVertical: 80,
@@ -44,4 +41,4 @@ const Stilos = StyleSheet.create({
     }
 });
 
-export default Stilos;
+export default styles;

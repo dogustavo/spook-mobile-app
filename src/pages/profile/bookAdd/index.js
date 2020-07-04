@@ -6,10 +6,8 @@ import AddPhoto from '../../../components/svg/addPhoto';
 import PersonalizedInput from '../../../components/input';
 import Button from '../../../components/button';
 
-import Select from './components/select';
-
-import Stilos from './style';
 import colors from '../../../styles/colors';
+import styles from './style'
 
 import ImagePicker from 'react-native-image-crop-picker';
 
@@ -23,12 +21,6 @@ const BookAdd = ({ navigation }) => {
         select: '',
         avatar: ''
     });
-
-    const optionsSelect = [
-        { label: "Novo", value: "1"},
-        { label: "Semi novo", value: "2"},
-        { label: "Usado", value: "3"}
-    ]
 
     const formSubmit = () => {
         navigation.navigate('AuthLogin');
@@ -52,10 +44,10 @@ const BookAdd = ({ navigation }) => {
             navigateTo={'AuthLogin'}
             navigation={navigation}
         >
-            <View style={Stilos.container}>
+            <View style={styles.container}>
                 <TouchableOpacity
                     onPress={handlePhoto}
-                    style={Stilos.addPhoto}
+                    style={styles.addPhoto}
                 >
                     {
                         Object.keys(form.avatar).length
@@ -64,43 +56,36 @@ const BookAdd = ({ navigation }) => {
                                 source={{
                                     uri: form.avatar
                                 }}
-                                style={Stilos.photo}
+                                style={styles.photo}
                             />
                         :
                             <AddPhoto/>
                     }
                 </TouchableOpacity>
 
-                <KeyboardAvoidingView style={Stilos.keyBoard}>
+                <KeyboardAvoidingView style={styles.keyBoard}>
                     
                     <PersonalizedInput
                         value={form.name}
                         name="nome"
                         secureTextEntry={false}
-                        placeholder={'nome'}
+                        placeholder={'Nome'}
                         onChangeText={event => setForm({...form, name: event})}
                     />
                                         
                     <PersonalizedInput
                         value={form.descricao}
-                        name="nome"
+                        name="description"
                         multiline={true}
                         numberOfLines={4}
                         secureTextEntry={false}
                         placeholder={'Descrição'}
                         onChangeText={event => setForm({...form, descricao: event})}
                     />
-
-                    <Select
-                        options={optionsSelect}
-                        selectedValue={form.select}
-                        onValueChange={(itemValue) => setForm({...form, select: itemValue})}
-                    />
-
-                                        
+               
                     <PersonalizedInput
                         value={form.autor}
-                        name="nome"
+                        name="author"
                         secureTextEntry={false}
                         placeholder={'Autor'}
                         onChangeText={event => setForm({...form, autor: event})}
@@ -109,14 +94,14 @@ const BookAdd = ({ navigation }) => {
                                         
                     <PersonalizedInput
                         value={form.editora}
-                        name="nome"
+                        name="publisher"
                         secureTextEntry={false}
                         placeholder={'Editora'}
                         onChangeText={event => setForm({...form, editora: event})}
                     />
                    
 
-                    <View style={Stilos.wrapButton}>
+                    <View style={styles.wrapButton}>
                         <Button
                             onPress={formSubmit}
                             text={'Cadastrar'}
