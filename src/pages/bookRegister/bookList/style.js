@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     wrapBookName: {
         width: 350,
         position: 'absolute',
-        height: 120,
+        height: 80,
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
         bottom: 25,
         borderBottomRightRadius: 20,
@@ -46,10 +46,47 @@ const styles = StyleSheet.create({
     bookName: {
         textAlign: 'center',
         color: colors.white,
-        fontSize: 18,
+        fontSize: 20,
+        fontWeight: 'bold',
         paddingTop: 10
     },
-    
+    wrapLikeAndDeslike: {
+        position: 'absolute',
+        zIndex: 2,
+    },
+    deslike: {
+        position: 'absolute',
+        width: 160,
+        height: 110,
+        top: -180,
+        left: -160
+    },
+    like: {
+        position: 'absolute',
+        width: 160,
+        height: 110,
+        top: -180,
+        right: -160
+    },
+    wrapDistance: {
+        position: 'absolute',
+        zIndex: 2,
+        flexDirection: 'row',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        width: 100,
+        height: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: 20,
+        top: 40,
+        left: 40
+    },
+    distance: {
+        color: colors.white,
+        fontSize: 20,
+        marginLeft: 5,
+        fontWeight: 'bold',
+    }
     
 
 });

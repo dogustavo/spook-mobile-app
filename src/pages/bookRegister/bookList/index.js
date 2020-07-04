@@ -4,6 +4,10 @@ import { View, Text, Image, Animated, Dimensions, PanResponder } from 'react-nat
 import Screen from '../../../components/screen';
 import Header from '../../../components/header';
 
+import Deslike from '../../../assets/deslike.png';
+import Like from '../../../assets/like.png';
+import MapPin from '../../../components/svg/mapPin';
+
 import styles from './style';
 
 import booksData from '../../../components/JSON/book';
@@ -82,6 +86,25 @@ const BookList = () => {
                                         transform: [{rotate}]
                                     }}
                                 >
+                                    <View style={styles.wrapDistance}>
+                                        <MapPin/>
+
+                                        <Text
+                                            style={styles.distance}
+                                        >
+                                            {book.distance}
+                                        </Text>
+                                    </View>
+                                    <View style={styles.wrapLikeAndDeslike}>
+                                        <Image
+                                            source={Deslike}
+                                            style={styles.deslike}
+                                        />
+                                        <Image
+                                            source={Like}
+                                            style={styles.like}
+                                        />
+                                    </View>
                                     <Image
                                         source={{uri: `${book.photo}`}}
                                         style={styles.bookPhoto}
