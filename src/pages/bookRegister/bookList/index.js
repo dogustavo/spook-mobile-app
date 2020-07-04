@@ -30,7 +30,7 @@ const BookList = () => {
             if (gestureState.dx > SWIPE_THRESHOLD) {
                 console.log('swipe right');
             } else if (gestureState.dx < -SWIPE_THRESHOLD) {
-                forceSwipe('left')
+                console.log('Deslizou para esquerda')
             } else {
                Animated.spring(position, {
                    toValue: {x: 0, y: 0},
