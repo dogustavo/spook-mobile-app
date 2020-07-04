@@ -57,7 +57,7 @@ const Book = ({ book, swippable, onLike, onDislike }) => {
 
     const rotate = position.x.interpolate({
         inputRange: [-SCREEN_WIDTH / 2, SCREEN_WIDTH / 2],
-        outputRange: ['-45deg', '45deg']
+        outputRange: ['-30deg', '30deg']
     })
 
     const likeOpacity = position.x.interpolate({
@@ -204,7 +204,7 @@ const BookList = () => {
                                 key={book.id}
                                 book={book}
                                 onLike={handleLike}
-                                onDislike={handleLike}
+                                onDislike={handleDislike}
                                 swippable={index == 0}
                             />
                         )
