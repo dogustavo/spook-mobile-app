@@ -10,8 +10,10 @@ import colors from '../../../styles/colors';
 import styles from './style'
 
 import ImagePicker from 'react-native-image-crop-picker';
+import { useNavigation } from '@react-navigation/native';
 
-const BookAdd = ({ navigation }) => {
+const BookAdd = () => {
+    const navigation = useNavigation()
     const [avatar, setAvatar]             = useState({});
     const [form, setForm]                 = useState({
         name: '',
@@ -23,7 +25,7 @@ const BookAdd = ({ navigation }) => {
     });
 
     const formSubmit = () => {
-        navigation.navigate('AuthLogin');
+        navigation.goBack();
     };
 
     const handlePhoto = () => {
