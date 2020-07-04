@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { View, Text, Image, Animated, Dimensions, PanResponder, TouchableOpacity } from 'react-native';
 
 import Screen from '../../../components/screen';
@@ -19,27 +19,32 @@ import { useNavigation } from '@react-navigation/native';
 const SWIPE_THRESHOLD = 0.25 * SCREEN_WIDTH;
 const SWIPE_OUT_DURATION = 250;
 const SCREEN_WIDTH = Dimensions.get('window').width
-const position = new Animated.ValueXY();
 
+const position = new Animated.ValueXY({ x: 0, y: 0 });
 
-const BookList = () => {
-    const [ current, setCurrent ] = useState(0);
-    const navigation = useNavigation()
+const Book = ({ book, swippable, onLike, onDislike }) => {  
+    const forceSwipe = (direction, cb) => {
+        const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
+        Animated.timing(position, {
+            toValue: { x, y: 0 },
+            duration: SWIPE_OUT_DURATION,
+            useNativeDriver: true
+        }).start(() =>{
+            position.setValue({ x: 0, y: 0 });
+            cb()
+        });
+    }
 
-    const panResponder = PanResponder.create({
+    const panResponder = useRef(PanResponder.create({
         onStartShouldSetPanResponder:(evt, gestureState) => true,
         onPanResponderMove:(evt, gestureState) => {
             position.setValue({ x: gestureState.dx, y: gestureState.dy });
         } ,
         onPanResponderRelease:(evt, gestureState) => {
             if (gestureState.dx > 1 * SCREEN_WIDTH * 0.4) {
-                console.log('swipe right');
-                forceSwipe('right')
-                likeFunction()
+                forceSwipe('right', () => onLike(book))
             } else if (gestureState.dx < -1 * SCREEN_WIDTH * 0.4) {
-                // dislikeFunction()
-                console.log('Deslizou para esquerda')
-                forceSwipe('left')
+                forceSwipe('left', () => onDislike(book))
             } else {
                Animated.spring(position, {
                    toValue: {x: 0, y: 0},
@@ -48,26 +53,7 @@ const BookList = () => {
                }).start()
             }
         }
-    })
-
-    const forceSwipe = (direction) => {
-        const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
-        Animated.timing(position, {
-            toValue: { x, y: 0 },
-            duration: SWIPE_OUT_DURATION,
-            useNativeDriver: true
-        }).start(() =>{
-            position.setValue({ x: 0, y: 0 });
-            setCurrent(current +1)
-        });
-    }
-
-    const likeFunction = () => {
-        const [user, ...rest] = booksData;
-        if(user.like === true) {
-            navigation.navigate('Profile')
-        }
-    }
+    })).current
 
     const rotate = position.x.interpolate({
         inputRange: [-SCREEN_WIDTH / 2, SCREEN_WIDTH / 2],
@@ -91,11 +77,117 @@ const BookList = () => {
         outputRange: [1, 0, 1],
         extrapolate: 'clamp'
     })
+
     const nextCardScale = position.x.interpolate({
         inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
         outputRange: [1, 0.8, 1],
         extrapolate: 'clamp'
     })
+
+    if (swippable)
+        return (
+            <Animated.View 
+                {...panResponder.panHandlers}
+                style={{
+                    ...styles.card,
+                    transform: [{rotate}]
+                }}
+            >
+                <View style={styles.wrapDistance}>
+                    <MapPin/>
+                    <Text style={styles.distance}>
+                        {book.distance}
+                    </Text>
+                </View>
+                <View style={styles.wrapLikeAndDeslike}>
+                    <Animated.Image
+                        source={Deslike}
+                        style={{
+                            ...styles.deslike,
+                            opacity: dislikeOpacity
+                        }}
+                    />
+                    <Animated.Image
+                        source={Like}
+                        style={{
+                            ...styles.like,
+                            opacity: likeOpacity
+                        }}
+                    />
+                </View>
+                <Image
+                    source={{uri: `${book.photo}`}}
+                    style={styles.bookPhoto}
+                />
+
+                <View style={styles.wrapBookName}>
+                    <Text style={styles.bookName}>{book.name}</Text>
+                </View>
+            </Animated.View>
+        )
+
+    return (
+        <Animated.View 
+            key={book.id} 
+            style={{
+                ...styles.card,
+                opacity: nextCardOpacity,
+                transform: [{ scale: nextCardScale }]
+            }}
+        >
+            <View style={styles.wrapDistance}>
+                <MapPin/>
+                <Text style={styles.distance}>
+                    {book.distance}
+                </Text>
+            </View>
+            <View style={styles.wrapLikeAndDeslike}>
+                <Animated.Image
+                    source={Deslike}
+                    style={{
+                        ...styles.deslike,
+                        opacity: dislikeOpacity
+                    }}
+                />
+                <Animated.Image
+                    source={Like}
+                    style={{
+                        ...styles.like,
+                        opacity: likeOpacity
+                    }}
+                />
+            </View>
+            <Image
+                source={{uri: `${book.photo}`}}
+                style={styles.bookPhoto}
+            />
+            <View style={styles.wrapBookName}>
+                <Text style={styles.bookName}>{book.name}</Text>
+            </View>
+        </Animated.View>
+    )
+}
+
+const BookList = () => {
+    const navigation = useNavigation()
+    
+    const [books, setBooks] = useState(booksData);
+
+    const removeFirstBook = () => {
+        setBooks(([, ...prev]) => prev);
+    }
+
+    const handleLike = (book) => {
+        removeFirstBook()
+
+        if(book.like === true) {
+            navigation.navigate('Profile')
+        }
+    }
+
+    const handleDislike = (setBooks) => {
+        removeFirstBook()
+    }
     
     return (
         <Screen color="#FFF">
@@ -106,100 +198,17 @@ const BookList = () => {
                 <View 
                     style={styles.cardContainer}
                 >
-                    {
-                        booksData.map((book, index) => {
-                            {
-                                console.log('index, current', index, current)
-                            }
-                            return index == current ? (
-                                <Animated.View 
-                                    key={book.id} 
-                                    {...panResponder.panHandlers}
-                                    style={{
-                                        ...styles.card,
-                                        transform: [{rotate}]
-                                    }}
-                                >
-                                    <View style={styles.wrapDistance}>
-                                        <MapPin/>
-
-                                        <Text
-                                            style={styles.distance}
-                                        >
-                                            {book.distance}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.wrapLikeAndDeslike}>
-                                        <Animated.Image
-                                            source={Deslike}
-                                            style={{
-                                                ...styles.deslike,
-                                                opacity: dislikeOpacity
-                                            }}
-                                        />
-                                        <Animated.Image
-                                            source={Like}
-                                            style={{
-                                                ...styles.like,
-                                                opacity: likeOpacity
-                                            }}
-                                        />
-                                    </View>
-                                    <Image
-                                        source={{uri: `${book.photo}`}}
-                                        style={styles.bookPhoto}
-                                    />
-
-                                    <View style={styles.wrapBookName}>
-                                        <Text style={styles.bookName}>{book.name}</Text>
-                                    </View>
-                                </Animated.View>
-                            ) : (
-                                <Animated.View 
-                                    key={book.id} 
-                                    style={{
-                                        ...styles.card,
-                                        opacity: nextCardOpacity,
-                                        transform: [{ scale: nextCardScale }]
-                                    }}
-                                >
-                                    <View style={styles.wrapDistance}>
-                                        <MapPin/>
-
-                                        <Text
-                                            style={styles.distance}
-                                        >
-                                            {book.distance}
-                                        </Text>
-                                    </View>
-                                    <View style={styles.wrapLikeAndDeslike}>
-                                        <Animated.Image
-                                            source={Deslike}
-                                            style={{
-                                                ...styles.deslike,
-                                                opacity: dislikeOpacity
-                                            }}
-                                        />
-                                        <Animated.Image
-                                            source={Like}
-                                            style={{
-                                                ...styles.like,
-                                                opacity: likeOpacity
-                                            }}
-                                        />
-                                    </View>
-                                    <Image
-                                        source={{uri: `${book.photo}`}}
-                                        style={styles.bookPhoto}
-                                    />
-
-                                    <View style={styles.wrapBookName}>
-                                        <Text style={styles.bookName}>{book.name}</Text>
-                                    </View>
-                                </Animated.View>
-                            )
-                        }).reverse()
-                    }  
+                    {books.map((book, index) => {
+                        return (
+                            <Book
+                                key={book.id}
+                                book={book}
+                                onLike={handleLike}
+                                onDislike={handleLike}
+                                swippable={index == 0}
+                            />
+                        )
+                    }).reverse()}
                 </View>
                 <View style={styles.wrapButtons}>
                     <TouchableOpacity
