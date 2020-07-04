@@ -17,8 +17,8 @@ const SWIPE_OUT_DURATION = 250;
 const SCREEN_WIDTH = Dimensions.get('window').width
 const position = new Animated.ValueXY();
 
-const BookList = () => {
 
+const BookList = () => {
     const [ like, setLike ] = useState([]);
     const [ dislike, setDislike ] = useState([]);
 
@@ -31,9 +31,9 @@ const BookList = () => {
             position.setValue({ x: gestureState.dx, y: gestureState.dy });
         } ,
         onPanResponderRelease:(evt, gestureState) => {
-            if (gestureState.dx > SWIPE_THRESHOLD) {
+            if (gestureState.dx > 1 * SCREEN_WIDTH * 0.4) {
                 console.log('swipe right');
-            } else if (gestureState.dx < -SWIPE_THRESHOLD) {
+            } else if (gestureState.dx < -1 * SCREEN_WIDTH * 0.4) {
                 console.log('Deslizou para esquerda')
             } else {
                Animated.spring(position, {
@@ -44,26 +44,21 @@ const BookList = () => {
         }
     })
 
-    const onSwipeComplete = (direction) => {
-        const item = data[current];
-
-        direction === 'right' ? setLike(item) : setDislike(item);
-        position.setValue({ x: 0, y: 0 });
-        setCurrent(current + 1)
-    }
-
-    const forceSwipe = (direction) => {
-        const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
-        Animated.timing(position, {
-          toValue: { x, y: 0 },
-          duration: SWIPE_OUT_DURATION,
-          useNativeDriver: true
-        }).start(() => onSwipeComplete(direction));
-      }
-
     const rotate = position.x.interpolate({
-        inputRange: [-SCREEN_WIDTH * 1.5, 0, SCREEN_WIDTH * 1.5],
-        outputRange: ['-120deg', '0deg', '120deg']
+        inputRange: [-SCREEN_WIDTH / 2, SCREEN_WIDTH / 2],
+        outputRange: ['-45deg', '45deg']
+    })
+
+    const likeOpacity = position.x.interpolate({
+        inputRange: [0, SCREEN_WIDTH/4],
+        outputRange: [0, 1],
+        extrapolate: 'clamp'
+    })
+    
+    const dislikeOpacity = position.x.interpolate({
+        inputRange: [-SCREEN_WIDTH/4, 0],
+        outputRange: [1, 0],
+        extrapolate: 'clamp'
     })
     
     return (
@@ -96,13 +91,19 @@ const BookList = () => {
                                         </Text>
                                     </View>
                                     <View style={styles.wrapLikeAndDeslike}>
-                                        <Image
+                                        <Animated.Image
                                             source={Deslike}
-                                            style={styles.deslike}
+                                            style={{
+                                                ...styles.deslike,
+                                                opacity: dislikeOpacity
+                                            }}
                                         />
-                                        <Image
+                                        <Animated.Image
                                             source={Like}
-                                            style={styles.like}
+                                            style={{
+                                                ...styles.like,
+                                                opacity: likeOpacity
+                                            }}
                                         />
                                     </View>
                                     <Image
