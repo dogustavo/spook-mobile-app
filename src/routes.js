@@ -85,14 +85,14 @@ export default function Routes() {
                     </>
                 ) : (
                     <>
-                        <Stack.Screen 
+                        {/* <Stack.Screen 
                             name="AuthLogin"
                             component={AuthLogin}
                         />
                         <Stack.Screen 
                             name="UserRegister"
                             component={UserRegister}
-                        />
+                        /> */}
                         <Stack.Screen 
                             name="BookAdd"
                             component={BookAdd}

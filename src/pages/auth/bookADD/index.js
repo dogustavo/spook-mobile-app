@@ -26,8 +26,8 @@ const BookAdd = ({ navigation }) => {
 
     const optionsSelect = [
         { label: "Novo", value: "1"},
-        { label: "Mediano", value: "2"},
-        { label: "Antigo", value: "3"}
+        { label: "Semi novo", value: "2"},
+        { label: "Usado", value: "3"}
     ]
 
     const formSubmit = () => {

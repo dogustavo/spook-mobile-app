@@ -1,5 +1,5 @@
-
 import { StyleSheet } from 'react-native';
+import colors from '../../../../styles/colors'
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +13,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   picker: {
-    width: '78%'
+    height: 46,
+    width: 310,
+    borderColor: colors.jet,
+    borderRadius: 7,
+    borderStyle: 'solid',
+    color: colors.jet,
   },
   pickerItem: {
   }
