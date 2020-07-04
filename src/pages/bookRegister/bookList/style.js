@@ -86,6 +86,20 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 5,
         fontWeight: 'bold',
+    },
+    wrapButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        marginTop: 30
+    },
+    button: {
+        width: 100,
+        height: 100,
+        backgroundColor: colors.white,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 100/2,
     }
     
 
