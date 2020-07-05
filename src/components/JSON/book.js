@@ -2,7 +2,7 @@ const BOOK_DATA = [
     {
         id: 1,
         name: 'Tração',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel rutrum magna. Sed ut turpis aliquam, vehicula dui a, luctus arcu',
+        description: 'Lorem ipsum dolor sit amet, elit consectetur adipiscing elit. Quisque vel rutrum magna. Sed ut turpis aliquam, vehicula dui a, luctus arcu',
         condition: 'Usado',
         author: 'George R. R. Martin',
         publisher: 'Vaga Lume',
@@ -14,7 +14,7 @@ const BOOK_DATA = [
     {
         id: 2,
         name: 'Diário de um banana',
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque vel rutrum magna. Sed ut turpis aliquam, vehicula dui a, luctus arcu',
+        description: 'Lorem ipsum dolor sit amet, adipiscing elit. Quisque vel rutrum magna. Sed ut turpis aliquam, vehicula dui a, luctus arcu',
         condition: 'Usado',
         author: 'George Orwell',
         publisher: 'Vaga Lume',
