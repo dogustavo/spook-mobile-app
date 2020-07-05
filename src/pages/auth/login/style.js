@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable comma-dangle */
+/* eslint-disable no-trailing-spaces */
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
@@ -38,6 +41,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
     },
-})
+});
 
-export default styles
+export default styles;
