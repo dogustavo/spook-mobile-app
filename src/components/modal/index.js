@@ -8,7 +8,7 @@ const { height } = Dimensions.get('window');
 import styles from './style'
 import { useNavigation } from '@react-navigation/native';
 
-const ModalTemplate = ({children, navigateTo}) => {
+const ModalTemplate = ({children, navigateTo, showButton = true}) => {
     const [overlayAnimation] = useState(new Animated.Value(height));
 	const [fadeBackground] = useState(new Animated.Value(0));
     const [ showModal ] = useState(new Animated.Value(height));
@@ -81,14 +81,22 @@ const ModalTemplate = ({children, navigateTo}) => {
                     ]
                 }}
             >
-                <TouchableOpacity
-                    onPress={() => {
-                        closeModal()
-                    }}
-                    style={styles.wrapBackButton}
-                >
-                    <BackButton style={styles.backButton}/>
-                </TouchableOpacity>
+                {
+                    showButton 
+                    ?
+                        <TouchableOpacity
+                            onPress={() => {
+                                closeModal()
+                            }}
+                            style={styles.wrapBackButton}
+                        >
+                            <BackButton style={styles.backButton}/>
+                        </TouchableOpacity>
+                    :
+                        <></>
+
+                }
+                
 
                 {children}
 

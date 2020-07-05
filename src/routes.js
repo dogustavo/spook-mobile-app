@@ -71,6 +71,10 @@ export default function Routes() {
             }}>
                 {isAuth ? (
                     <>
+                        <Stack.Screen 
+                            name="BookAdd"
+                            component={BookAdd}
+                        />
                         <Stack.Screen
                             name='Profile'
                             component={Profile}
@@ -92,10 +96,6 @@ export default function Routes() {
                         <Stack.Screen 
                             name="UserRegister"
                             component={UserRegister}
-                        />
-                        <Stack.Screen 
-                            name="BookAdd"
-                            component={BookAdd}
                         />
                     </>
                 )}

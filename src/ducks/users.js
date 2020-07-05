@@ -65,7 +65,6 @@ export const saveUser = data => async dispatch => {
   try {
     const response = await UserService.createUser(data)
     dispatch(createUser(response))
-    alert(JSON.stringify(response, null, 2))
   } catch (error) {
     alert(error.message)
   }

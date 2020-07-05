@@ -25,7 +25,9 @@ const BookAdd = () => {
     });
 
     const formSubmit = () => {
-        navigation.goBack();
+        setTimeout(() => {
+            navigation.navigate('AppNavigator');
+        }, 1000)
     };
 
     const handlePhoto = () => {
@@ -43,8 +45,7 @@ const BookAdd = () => {
 
     return (
         <ModalTemplate
-            navigateTo={'AuthLogin'}
-            navigation={navigation}
+            showButton={false}
         >
             <View style={styles.container}>
                 <TouchableOpacity
@@ -74,16 +75,6 @@ const BookAdd = () => {
                         placeholder={'Nome'}
                         onChangeText={event => setForm({...form, name: event})}
                     />
-                                        
-                    <PersonalizedInput
-                        value={form.descricao}
-                        name="description"
-                        multiline={true}
-                        numberOfLines={4}
-                        secureTextEntry={false}
-                        placeholder={'Descrição'}
-                        onChangeText={event => setForm({...form, descricao: event})}
-                    />
                
                     <PersonalizedInput
                         value={form.autor}
@@ -101,6 +92,16 @@ const BookAdd = () => {
                         placeholder={'Editora'}
                         onChangeText={event => setForm({...form, editora: event})}
                     />
+
+                    <PersonalizedInput
+                        value={form.descricao}
+                        name="description"
+                        multiline={true}
+                        numberOfLines={4}
+                        secureTextEntry={false}
+                        placeholder={'Descrição'}
+                        onChangeText={event => setForm({...form, descricao: event})}
+                    />
                    
 
                     <View style={styles.wrapButton}>
@@ -108,10 +109,6 @@ const BookAdd = () => {
                             onPress={formSubmit}
                             text={'Cadastrar'}
                             bgColor={colors.melachite}
-                        />
-                        <Button
-                            text={'Cancelar'}
-                            bgColor={colors.spanishGray}
                         />
                     </View>
                 </KeyboardAvoidingView>

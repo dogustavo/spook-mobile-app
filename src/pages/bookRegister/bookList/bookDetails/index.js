@@ -12,7 +12,6 @@ const size = {
 }
 
 const BookModalDetails = ({ route, navigation }) => {
-    console.log(navigation)
     const book = route.params
     return (
         <ModalTemplate>

@@ -52,7 +52,7 @@ const UserRegister = ({ navigation }) => {
             saveUser({...form})
         );
         
-        navigation.navigate('BookAdd');
+        // navigation.navigate('BookAdd');
     };
 
     const handlePhoto = () => {
