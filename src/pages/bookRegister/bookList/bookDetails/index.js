@@ -11,7 +11,7 @@ const size = {
     height: 40,
 }
 
-const BookModalDetails = ({ route, navigation }) => {
+const BookModalDetails = ({ route }) => {
     const book = route.params
     return (
         <ModalTemplate>

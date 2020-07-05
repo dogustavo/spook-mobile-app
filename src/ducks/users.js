@@ -80,10 +80,10 @@ export const saveUser = data => async dispatch => {
     if(response._id){
 
       requestLogin({email: data.email, password: data.password })
-          .then(res => {
-            setToken(res.token);
-            dispatch(authLogin(res.token));
-          })
+                  .then(res => {
+                    setToken(res.token);
+                    dispatch(authLogin(res.token));
+                  })
     }
   } catch (error) {
     alert("Algo deu errado no seu cadastro, por favor tente novamente.")

@@ -184,7 +184,7 @@ const BookList = () => {
         removeFirstBook()
 
         if(book.like === true) {
-            navigation.navigate('Profile')
+            navigation.navigate('MatchScreen', {...book})
         }
     }
 

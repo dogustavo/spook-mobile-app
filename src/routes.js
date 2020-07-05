@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import React, { useRef } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { 

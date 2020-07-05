@@ -4,7 +4,7 @@ import colors from '../../../styles/colors';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingVertical: 80,
+        marginTop: 80,
         alignItems: 'center',
     },
     addPhoto: {

@@ -23,8 +23,7 @@ import styles from './style';
 
 const Profile = () => {
     const user = {
-        name: 'Lucas Filho',
-        age: '26',
+        name: 'Gustavo Oliveira'
     };
 
     const dispatch = useDispatch();
@@ -48,7 +47,7 @@ const Profile = () => {
 
                     <View style={styles.wrapUserDetails}>
                         <Text style={styles.userText}>
-                            {user.name}, {user.age}
+                            {user.name}
                         </Text>
                     </View>
 

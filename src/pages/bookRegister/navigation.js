@@ -1,5 +1,9 @@
 import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
+import { 
+    createStackNavigator, 
+    TransitionSpecs, 
+    HeaderStyleInterpolators 
+} from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -7,7 +11,28 @@ import BookPhoto from './bookPhoto';
 import BookNameDescription from './bookNamDescription';
 import BookDetails from './bookDetails';
 import BookList from './bookList';
-import BookModalDetails from './bookList/bookDetails'
+import BookModalDetails from './bookList/bookDetails';
+import MatchScreen from './bookList/matchScreen';
+
+const fadeTransition = {
+	gestureDirection: 'horizontal',
+  transitionSpec: {
+    open: TransitionSpecs.TransitionIOSSpec,
+    close: TransitionSpecs.TransitionIOSSpec,
+  },
+  headerStyleInterpolator: HeaderStyleInterpolators.forFade,
+  cardStyleInterpolator: ({ current }) => {
+    return {
+      cardStyle: {
+            opacity: current.progress.interpolate({
+          inputRange: [0, 1],
+          outputRange: [0, 1],
+          extrapolate: 'clamp',
+        }),
+      }
+    };
+  },
+};
 
 const bookStack = () => {
     return (
@@ -28,6 +53,14 @@ const bookStack = () => {
 				name="BookModalDetails" 
                 component={BookModalDetails}
                 initialParams={{ book: null }}
+			/>
+            <Stack.Screen 
+				name="MatchScreen" 
+                component={MatchScreen}
+                initialParams={{ book: null }}
+                options={{
+                    ...fadeTransition
+                }}
 			/>
 
             <Stack.Screen 

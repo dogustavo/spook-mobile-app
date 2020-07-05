@@ -56,96 +56,86 @@ const BookAdd = () => {
 
     return (
         <ModalTemplate
-            navigateTo={'Profile'}
-            navigation={navigation}
             shouldnClose={true}
             showButton={false}
         >
-            <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={styles.container}>
-                <TouchableOpacity
-                    onPress={handlePhoto}
-                    style={styles.addPhoto}
-                >
-                    {
-                        Object.keys(form.avatar).length
-                        ?
-                            <Image
-                                source={{
-                                    uri: form.avatar
-                                }}
-                                style={styles.photo}
-                            />
-                        :
-                            <AddPhoto/>
-                    }
-                </TouchableOpacity>
+            <ScrollView 
+                showsVerticalScrollIndicator={false}
+            >
+                <View style={styles.container}>
+                    <TouchableOpacity
+                        onPress={handlePhoto}
+                        style={styles.addPhoto}
+                    >
+                        {
+                            Object.keys(form.avatar).length
+                            ?
+                                <Image
+                                    source={{
+                                        uri: form.avatar
+                                    }}
+                                    style={styles.photo}
+                                />
+                            :
+                                <AddPhoto/>
+                        }
+                    </TouchableOpacity>
 
-                <KeyboardAvoidingView style={styles.keyBoard}>
-                    
-                    <PersonalizedInput
-                        value={form.name}
-                        name="nome"
-                        secureTextEntry={false}
-                        placeholder={'Nome'}
-                        onChangeText={event => setForm({...form, name: event})}
-                    />
-
-                    <Select
-                        data={data}
-                        placeholder={form.select.label ? form.select.label : 'Condição ' } 
-                        initialValue={data}
-                        value={form.select.label}
-                        onChange={(option)=> setForm({...form, select: option})}
-                    />
-               
-                    <PersonalizedInput
-                        value={form.autor}
-                        name="author"
-                        secureTextEntry={false}
-                        placeholder={'Autor'}
-                        onChangeText={event => setForm({...form, autor: event})}
-                    />
-                                        
-                    <PersonalizedInput
-                        value={form.editora}
-                        name="publisher"
-                        secureTextEntry={false}
-                        placeholder={'Editora'}
-                        onChangeText={event => setForm({...form, editora: event})}
-                    />           
-                                                           
-                   <PersonalizedInput
-                        value={form.descricao}
-                        name="description"
-                        textArea={true}
-                        multiline={true}
-                        numberOfLines={5}
-                        secureTextEntry={false}
-                        placeholder={'Descrição'}
-                        onChangeText={event => setForm({...form, descricao: event})}
-                    />
-
-                    <PersonalizedInput
-                        value={form.descricao}
-                        name="description"
-                        multiline={true}
-                        numberOfLines={4}
-                        secureTextEntry={false}
-                        placeholder={'Descrição'}
-                        onChangeText={event => setForm({...form, descricao: event})}
-                    />
-                   
-
-                    <View style={styles.wrapButton}>
-                        <Button
-                            onPress={formSubmit}
-                            text={'Cadastrar'}
-                            bgColor={colors.melachite}
+                    <KeyboardAvoidingView style={styles.keyBoard}>
+                        
+                        <PersonalizedInput
+                            value={form.name}
+                            name="nome"
+                            secureTextEntry={false}
+                            placeholder={'Nome'}
+                            onChangeText={event => setForm({...form, name: event})}
                         />
-                    </View>
-                </KeyboardAvoidingView>
-            </View>
+
+                        <Select
+                            data={data}
+                            placeholder={form.select.label ? form.select.label : 'Condição ' } 
+                            initialValue={data}
+                            value={form.select.label}
+                            onChange={(option)=> setForm({...form, select: option})}
+                        />
+                
+                        <PersonalizedInput
+                            value={form.autor}
+                            name="author"
+                            secureTextEntry={false}
+                            placeholder={'Autor'}
+                            onChangeText={event => setForm({...form, autor: event})}
+                        />
+                                            
+                        <PersonalizedInput
+                            value={form.editora}
+                            name="publisher"
+                            secureTextEntry={false}
+                            placeholder={'Editora'}
+                            onChangeText={event => setForm({...form, editora: event})}
+                        />           
+                                                            
+                    <PersonalizedInput
+                            value={form.descricao}
+                            name="description"
+                            textArea={true}
+                            multiline={true}
+                            numberOfLines={5}
+                            secureTextEntry={false}
+                            placeholder={'Descrição'}
+                            onChangeText={event => setForm({...form, descricao: event})}
+                        />
+                    
+
+                        <View style={styles.wrapButton}>
+                            <Button
+                                onPress={formSubmit}
+                                text={'Cadastrar'}
+                                bgColor={colors.melachite}
+                            />
+                        </View>
+                    </KeyboardAvoidingView>
+                </View>
             </ScrollView>
         </ModalTemplate> 
     );
