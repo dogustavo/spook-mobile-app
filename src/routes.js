@@ -98,7 +98,6 @@ export default function Routes() {
                             name="UserRegister"
                             component={UserRegister}
                         />
-
                     </>
                 )}
             </Stack.Navigator>

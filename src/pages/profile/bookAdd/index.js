@@ -28,7 +28,9 @@ const BookAdd = () => {
     });
 
     const formSubmit = () => {
-        navigation.navigate('Profile');
+        setTimeout(() => {
+            navigation.navigate('AppNavigator');
+        }, 1000)
     };
 
     const handlePhoto = () => {
@@ -57,6 +59,7 @@ const BookAdd = () => {
             navigateTo={'Profile'}
             navigation={navigation}
             shouldnClose={true}
+            showButton={false}
         >
             <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
@@ -122,6 +125,17 @@ const BookAdd = () => {
                         placeholder={'Descrição'}
                         onChangeText={event => setForm({...form, descricao: event})}
                     />
+
+                    <PersonalizedInput
+                        value={form.descricao}
+                        name="description"
+                        multiline={true}
+                        numberOfLines={4}
+                        secureTextEntry={false}
+                        placeholder={'Descrição'}
+                        onChangeText={event => setForm({...form, descricao: event})}
+                    />
+                   
 
                     <View style={styles.wrapButton}>
                         <Button

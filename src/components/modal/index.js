@@ -7,11 +7,14 @@ import BackButton from '../../components/svg/backButton';
 const { height } = Dimensions.get('window');
 
 import styles from './style'
+import { useNavigation } from '@react-navigation/native';
 
-const ModalTemplate = ({children, shouldnClose, navigation, navigateTo}) => {
+const ModalTemplate = ({children, shouldnClose, showButton = true, navigation, navigateTo}) => {
     const [overlayAnimation] = useState(new Animated.Value(height));
 	const [fadeBackground] = useState(new Animated.Value(0));
-	const [ showModal ] = useState(new Animated.Value(height))
+    const [ showModal ] = useState(new Animated.Value(height));
+
+    const navigation = useNavigation()
 
 	const openModal = () => {
 		Animated.sequence([
@@ -53,7 +56,9 @@ const ModalTemplate = ({children, shouldnClose, navigation, navigateTo}) => {
                 duration: 50,
                 useNativeDriver: true,
 			}),
-        ]).start();
+        ]).start(() => {
+            navigation.goBack()
+        });
     }
 
     useEffect(() => {
@@ -80,18 +85,22 @@ const ModalTemplate = ({children, shouldnClose, navigation, navigateTo}) => {
                     ]
                 }}
             >
-
-                {!shouldnClose && (
-                    <TouchableOpacity
-                        onPress={() => {
-                            closeModal()
-                            navigation.navigate(`${navigateTo}`)
-                        }}
-                        style={styles.wrapBackButton}
+                {
+                    showButton 
+                    ?
+                        <TouchableOpacity
+                            onPress={() => {
+                                closeModal()
+                            }}
+                            style={styles.wrapBackButton}
                         >
-                        <BackButton style={styles.backButton}/>
-                    </TouchableOpacity>
-                )}
+                            <BackButton style={styles.backButton}/>
+                        </TouchableOpacity>
+                    :
+                        <></>
+
+                }
+                
 
                 {children}
 

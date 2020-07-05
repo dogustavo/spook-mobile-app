@@ -1,6 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable comma-dangle */
-/* eslint-disable no-trailing-spaces */
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -10,6 +7,7 @@ import BookPhoto from './bookPhoto';
 import BookNameDescription from './bookNamDescription';
 import BookDetails from './bookDetails';
 import BookList from './bookList';
+import BookModalDetails from './bookList/bookDetails'
 
 const bookStack = () => {
     return (
@@ -26,6 +24,12 @@ const bookStack = () => {
 				name="BookList" 
 				component={BookList}
 			/>
+            <Stack.Screen 
+				name="BookModalDetails" 
+                component={BookModalDetails}
+                initialParams={{ book: null }}
+			/>
+
             <Stack.Screen 
 				name="BookPhoto" 
 				component={BookPhoto}
