@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Animated, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { View, Animated, Dimensions, TouchableOpacity } from 'react-native';
+
 
 import BackButton from '../../components/svg/backButton';
 
@@ -7,7 +8,7 @@ const { height } = Dimensions.get('window');
 
 import styles from './style'
 
-const ModalTemplate = ({children, navigation, navigateTo}) => {
+const ModalTemplate = ({children, shouldnClose, navigation, navigateTo}) => {
     const [overlayAnimation] = useState(new Animated.Value(height));
 	const [fadeBackground] = useState(new Animated.Value(0));
 	const [ showModal ] = useState(new Animated.Value(height))
@@ -31,6 +32,9 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
 			})
 		]).start();
 	};
+
+
+
 
 	const closeModal = () => {
 		Animated.sequence([
@@ -76,15 +80,18 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
                     ]
                 }}
             >
-                <TouchableOpacity
-                    onPress={() => {
-                        closeModal()
-                        navigation.navigate(`${navigateTo}`)
-                    }}
-                    style={styles.wrapBackButton}
-                >
-                    <BackButton style={styles.backButton}/>
-                </TouchableOpacity>
+
+                {!shouldnClose && (
+                    <TouchableOpacity
+                        onPress={() => {
+                            closeModal()
+                            navigation.navigate(`${navigateTo}`)
+                        }}
+                        style={styles.wrapBackButton}
+                        >
+                        <BackButton style={styles.backButton}/>
+                    </TouchableOpacity>
+                )}
 
                 {children}
 

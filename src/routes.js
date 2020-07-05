@@ -71,16 +71,21 @@ export default function Routes() {
             }}>
                 {isAuth ? (
                     <>
-                        <Stack.Screen
-                            name='Profile'
-                            component={Profile}
+                        <Stack.Screen 
+                            name="BookAdd"
+                            component={BookAdd}
                         />
+                        
                         <Stack.Screen
                             name="AppNavigator"
                             component={BookStack}
                             options={{
                                 ...fadeTransition
                             }}
+                        />
+                        <Stack.Screen
+                            name='Profile'
+                            component={Profile}
                         />
                     </>
                 ) : (
@@ -93,10 +98,7 @@ export default function Routes() {
                             name="UserRegister"
                             component={UserRegister}
                         />
-                        <Stack.Screen 
-                            name="BookAdd"
-                            component={BookAdd}
-                        />
+
                     </>
                 )}
             </Stack.Navigator>

@@ -9,6 +9,13 @@
 
 import * as UserService from '../services/user'
 
+
+import { requestLogin } from '../services/auth';
+import { setToken } from '../utils/http';
+import { authLogin } from '../ducks/auth'
+
+import { useDispatch } from 'react-redux';
+
 export const Types = {
   USER: 'users/USER',
   ADD_USER: 'users/ADD_USER' 
@@ -63,10 +70,22 @@ export const createUser = data => ({ type: Types.USER, payload: data });
 
 export const saveUser = data => async dispatch => {
   try {
+
+    // const dispatch = useDispatch();
+
     const response = await UserService.createUser(data)
-    dispatch(createUser(response))
-    alert(JSON.stringify(response, null, 2))
+    // dispatch(createUser(response))
+
+    
+    if(response._id){
+
+      requestLogin({email: data.email, password: data.password })
+          .then(res => {
+            setToken(res.token);
+            dispatch(authLogin(res.token));
+          })
+    }
   } catch (error) {
-    alert(error.message)
+    alert("Algo deu errado no seu cadastro, por favor tente novamente.")
   }
 }

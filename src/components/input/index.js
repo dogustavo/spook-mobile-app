@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable comma-dangle */
 /* eslint-disable no-trailing-spaces */
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, TextInput } from 'react-native';
 
 import UserIcon from '../../components/svg/user';
@@ -19,23 +19,36 @@ const inputIcons = {
     password: <Password/>
 };
 
-const PersonalizedInput = ({placeholder, secureTextEntry, onChangeText, value, name, icon}) => {
+const PersonalizedInput = ({placeholder, textArea, multiline, numberOfLines, secureTextEntry, onChangeText, value, name, icon}) => {
+    const [count, setCount] = useState(0)
+
+    const mudou = useCallback(() => {
+        setCount(count+1)
+        console.log(count)
+    },[count]);
+
     return (
         <View>
-            <View style={styles.icon}>
-                {inputIcons[icon]}
-            </View>
-            <TextInput
-                value={value}
-                name={name}
-                onChangeText={onChangeText}
-                autoCapitalize="none"
-                autoCorrect={false}
-                style={styles.inputs}
-                secureTextEntry={secureTextEntry}
-                placeholder={placeholder}
-                placeholderTextColor={colors.jet}
-            />
+            {!textArea && (
+                <View style={styles.icon}>
+                    {inputIcons[icon]}
+                </View>
+            )}
+                <TextInput
+                    multiline={multiline}
+                    numberOfLines={numberOfLines}
+                    value={value}
+                    name={name}
+                    onChangeText={onChangeText}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    style={textArea ? styles.textArea : styles.inputs}
+                    secureTextEntry={secureTextEntry}
+                    placeholder={placeholder}
+                    placeholderTextColor={colors.jet}
+                    onContentSizeChange={mudou}
+                />
+
         </View>
     );
 };

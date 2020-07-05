@@ -3,8 +3,8 @@ import colors from '../../styles/colors';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        position: 'relative'
+        // flex: 1,
+        // position: 'relative'
     },
     inputs: {
         alignSelf: 'center',
@@ -18,6 +18,19 @@ const styles = StyleSheet.create({
         borderStyle: 'solid',
         color: colors.jet,
         marginTop: 10
+    },
+    textArea: {
+        textAlignVertical: "top",
+        height: 126,
+        width: 310,
+        paddingLeft: 40,
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: colors.jet,
+        borderRadius: 7,
+        paddingHorizontal: 20,
+        borderStyle: 'solid',
+        color: colors.jet,
     },
     icon: {
         position: 'absolute',

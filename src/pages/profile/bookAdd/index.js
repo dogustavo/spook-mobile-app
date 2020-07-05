@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { View, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+import { View, ScrollView, TouchableOpacity, Image, KeyboardAvoidingView } from 'react-native';
+
 
 import ModalTemplate from '../../../components/modal';
 import AddPhoto from '../../../components/svg/addPhoto';
 import PersonalizedInput from '../../../components/input';
 import Button from '../../../components/button';
+
+import Select from './components/index';
 
 import colors from '../../../styles/colors';
 import styles from './style'
@@ -25,7 +28,7 @@ const BookAdd = () => {
     });
 
     const formSubmit = () => {
-        navigation.goBack();
+        navigation.navigate('Profile');
     };
 
     const handlePhoto = () => {
@@ -41,11 +44,21 @@ const BookAdd = () => {
         });
     };
 
+
+    const data = [
+        
+        { key: 1, label: 'Novo' },
+        { key: 2, label: 'Seminovo' },
+        { key: 3, label: 'Usado' }
+    ];
+
     return (
         <ModalTemplate
-            navigateTo={'AuthLogin'}
+            navigateTo={'Profile'}
             navigation={navigation}
+            shouldnClose={true}
         >
+            <ScrollView showsVerticalScrollIndicator={false}>
             <View style={styles.container}>
                 <TouchableOpacity
                     onPress={handlePhoto}
@@ -74,15 +87,13 @@ const BookAdd = () => {
                         placeholder={'Nome'}
                         onChangeText={event => setForm({...form, name: event})}
                     />
-                                        
-                    <PersonalizedInput
-                        value={form.descricao}
-                        name="description"
-                        multiline={true}
-                        numberOfLines={4}
-                        secureTextEntry={false}
-                        placeholder={'Descrição'}
-                        onChangeText={event => setForm({...form, descricao: event})}
+
+                    <Select
+                        data={data}
+                        placeholder={form.select.label ? form.select.label : 'Condição ' } 
+                        initialValue={data}
+                        value={form.select.label}
+                        onChange={(option)=> setForm({...form, select: option})}
                     />
                
                     <PersonalizedInput
@@ -92,7 +103,6 @@ const BookAdd = () => {
                         placeholder={'Autor'}
                         onChangeText={event => setForm({...form, autor: event})}
                     />
-
                                         
                     <PersonalizedInput
                         value={form.editora}
@@ -100,8 +110,18 @@ const BookAdd = () => {
                         secureTextEntry={false}
                         placeholder={'Editora'}
                         onChangeText={event => setForm({...form, editora: event})}
+                    />           
+                                                           
+                   <PersonalizedInput
+                        value={form.descricao}
+                        name="description"
+                        textArea={true}
+                        multiline={true}
+                        numberOfLines={5}
+                        secureTextEntry={false}
+                        placeholder={'Descrição'}
+                        onChangeText={event => setForm({...form, descricao: event})}
                     />
-                   
 
                     <View style={styles.wrapButton}>
                         <Button
@@ -109,13 +129,10 @@ const BookAdd = () => {
                             text={'Cadastrar'}
                             bgColor={colors.melachite}
                         />
-                        <Button
-                            text={'Cancelar'}
-                            bgColor={colors.spanishGray}
-                        />
                     </View>
                 </KeyboardAvoidingView>
             </View>
+            </ScrollView>
         </ModalTemplate> 
     );
 };
