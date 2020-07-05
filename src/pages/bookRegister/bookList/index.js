@@ -22,7 +22,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width
 
 const position = new Animated.ValueXY({ x: 0, y: 0 });
 
-const Book = ({ book, swippable, onLike, onDislike }) => {  
+const Book = ({ book, swippable, onLike, onDislike, navigation }) => {  
     const forceSwipe = (direction, cb) => {
         const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH;
         Animated.timing(position, {
@@ -120,9 +120,12 @@ const Book = ({ book, swippable, onLike, onDislike }) => {
                     style={styles.bookPhoto}
                 />
 
-                <View style={styles.wrapBookName}>
+                <TouchableOpacity
+                    style={styles.wrapBookName}
+                    onPress={() => navigation.navigate('BookModalDetails', { ...book })}
+                >
                     <Text style={styles.bookName}>{book.name}</Text>
-                </View>
+                </TouchableOpacity>
             </Animated.View>
         )
 
@@ -206,6 +209,7 @@ const BookList = () => {
                                 onLike={handleLike}
                                 onDislike={handleDislike}
                                 swippable={index == 0}
+                                navigation={navigation}
                             />
                         )
                     }).reverse()}

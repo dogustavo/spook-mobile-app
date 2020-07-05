@@ -35,20 +35,23 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     wrapBookName: {
-        width: 350,
+        width: 300,
         position: 'absolute',
         height: 80,
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
-        bottom: 25,
+        bottom: 60,
+        left: 21,
         borderBottomRightRadius: 20,
-        borderBottomLeftRadius: 20,
+        borderTopRightRadius: 20,
+        justifyContent: 'center'
     },
     bookName: {
-        textAlign: 'center',
+        alignSelf: 'flex-end',
         color: colors.white,
-        fontSize: 20,
+        fontSize: 28,
         fontWeight: 'bold',
-        paddingTop: 10
+        marginRight: 25,
+        marginLeft: 10
     },
     wrapLikeAndDeslike: {
         position: 'absolute',

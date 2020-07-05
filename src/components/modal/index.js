@@ -6,11 +6,14 @@ import BackButton from '../../components/svg/backButton';
 const { height } = Dimensions.get('window');
 
 import styles from './style'
+import { useNavigation } from '@react-navigation/native';
 
-const ModalTemplate = ({children, navigation, navigateTo}) => {
+const ModalTemplate = ({children, navigateTo}) => {
     const [overlayAnimation] = useState(new Animated.Value(height));
 	const [fadeBackground] = useState(new Animated.Value(0));
-	const [ showModal ] = useState(new Animated.Value(height))
+    const [ showModal ] = useState(new Animated.Value(height));
+
+    const navigation = useNavigation()
 
 	const openModal = () => {
 		Animated.sequence([
@@ -49,7 +52,9 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
                 duration: 50,
                 useNativeDriver: true,
 			}),
-        ]).start();
+        ]).start(() => {
+            navigation.goBack()
+        });
     }
 
     useEffect(() => {
@@ -79,7 +84,6 @@ const ModalTemplate = ({children, navigation, navigateTo}) => {
                 <TouchableOpacity
                     onPress={() => {
                         closeModal()
-                        navigation.navigate(`${navigateTo}`)
                     }}
                     style={styles.wrapBackButton}
                 >
